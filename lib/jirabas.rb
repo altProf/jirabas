@@ -12,7 +12,7 @@ module Jirabas
 
   def self.client
     Config.init
-    @client ||= JIRA::Client.new(Options)
+    @client ||= JIRA::Client.new(Config.all)
   end
 
   def self.my_in_progress_issues
@@ -20,6 +20,10 @@ module Jirabas
   end
   def self.issues_i_did_recently
     client.Issue.jql("assignee = #{Config.username} AND resolution != Unresolved AND updatedDate > '-2d'  ORDER BY updatedDate DESC")
+  end
+  def self.assigned_to_me
+    client.Issue.jql("assignee = #{Config.username} AND resolution = Unresolved ORDER BY updatedDate DESC")
+    .map { |e| "#{e.key}: #{e.summary}"}
   end
 
   def self.what_am_i_doing
@@ -30,12 +34,14 @@ module Jirabas
   end
 
   def self.run *args
-    binding.pry
-    #puts "I'm doing:\n"
-    #puts what_am_i_doing.join("\n").to_s
+    puts "I'm doing:\n"
+    puts what_am_i_doing.join("\n").to_s
 
-    #puts "----------\nI did recently:\n"
-    #puts what_did_i_do_recently.join("\n").to_s
+    puts "----------\nI did recently:\n"
+    puts what_did_i_do_recently.join("\n").to_s
+
+    puts "----------\nTo do:\n"
+    puts assigned_to_me.join("\n").to_s
   end
 
 end

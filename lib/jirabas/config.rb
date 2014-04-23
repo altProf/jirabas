@@ -11,7 +11,7 @@ class Jirabas::Config
     fetch(:password) {HighLine.new.ask('Please enter your password') {|h|
                                        h.echo = false  }}
 
-    fetch(:site) { 'https://jira' }
+    fetch(:site) { HighLine.new.ask('Please enter your JIRA url like this: https://jira.com') }
   end
 
   OtherDefaults =
