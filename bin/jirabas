@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'jirabas'
+p ARGV
+puts Jirabas.run *ARGV
