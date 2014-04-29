@@ -21,8 +21,8 @@ module Jirabas
   def self.issues_i_did_recently
     client.Issue.jql("assignee = #{Config.username} AND resolution != Unresolved AND updatedDate > '-2d'  ORDER BY updatedDate DESC")
   end
-  def self.assigned_to_me
-    client.Issue.jql("assignee = #{Config.username} AND resolution = Unresolved ORDER BY updatedDate DESC")
+  def self.to_do_assigned_to_me
+    client.Issue.jql("assignee = #{Config.username} AND resolution = Unresolved AND status != 'In Progress' ORDER BY updatedDate DESC")
     .map { |e| "#{e.key}: #{e.summary}"}
   end
 
@@ -41,7 +41,7 @@ module Jirabas
     puts what_did_i_do_recently.join("\n").to_s
 
     puts "----------\nTo do:\n"
-    puts assigned_to_me.join("\n").to_s
+    puts to_do_assigned_to_me.join("\n").to_s
   end
 
 end
