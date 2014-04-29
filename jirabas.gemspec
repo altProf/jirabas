@@ -18,11 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'jira-ruby'
-  spec.add_dependency 'highline'
-  spec.add_dependency 'trollop'
-  spec.add_dependency 'activesupport'
-  spec.add_dependency 'retryable'
+  spec.add_dependency 'jira-ruby', '0.1.8'
+  spec.add_dependency 'highline', '1.6.21'
+  #spec.add_dependency 'trollop'
+  spec.add_dependency 'activesupport', '4.0.4'
+  spec.add_dependency 'retryable', '1.3.5'
+
+  #just to shut up WARN Unresolved spec during .. reset
+  spec.add_dependency 'multi_json', '1.9.2'
+  spec.add_dependency 'tzinfo', '0.3.37'
+  spec.add_dependency 'thread_safe', '0.3.3'
 
   spec.add_development_dependency 'bundler', "~> 1.5"
   spec.add_development_dependency 'rake'
