@@ -1,24 +1,23 @@
 # jirabas
 
-TODO: Write a gem description
+Are you console man?
+Then don't spend your time by searching and clicking Jira to find which ticket number you just resolved!
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'jirabas'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install jirabas
+    gem install jirabas
 
 ## Usage
 
-TODO: Write usage instructions here
+    jirabas
+
+Will show actual information for you:
+-   Tickets in progress;
+-   Resolved tickets for past 2 days;
+-   Your tickets TODO.
+
+## Our TODO plans:
+-   Add pre-commit-message feature which allows to populate your git pre commit message template with tickets information.
 
 ## Contributing
 
