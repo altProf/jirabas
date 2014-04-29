@@ -1,12 +1,10 @@
 require "jirabas/version"
 require "jirabas/config"
 
-require 'pry'
 require 'jira' # jira-ruby gem
 require 'active_support/core_ext/hash'
-require 'trollop'
 require 'highline'
-#require 'retryable'
+#require 'pry'
 
 module Jirabas
 
