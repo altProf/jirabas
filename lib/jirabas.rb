@@ -4,7 +4,7 @@ require "jirabas/config"
 require 'jira' # jira-ruby gem
 require 'active_support/core_ext/hash'
 require 'highline'
-#require 'pry'
+require 'pry'
 
 module Jirabas
 
@@ -31,7 +31,23 @@ module Jirabas
     issues_i_did_recently.map { |e| "#{e.key}: #{e.summary}"}
   end
 
+  def self.todo arg
+    project_name = (Config.fetch(:project) rescue raise "Please put your project in your local .jirabas")
+    project = client.Project.find project_name
+
+    issue = client.Issue.build
+    issue.save 'fields' =>
+    { 'summary'=> arg, 'description' => arg,
+      'project'=> { 'id'=> project.id }, 'issuetype'=> { 'id'=> '3'} }
+
+    # issue.save fields: { summary: arg, project: { id: project.id }, issuetype: { id: 2} }
+    issue.fetch
+    pp issue
+  end
+
   def self.run *args
+    binding.pry
+
     puts "I'm doing:\n"
     puts what_am_i_doing.join("\n").to_s
 
@@ -40,6 +56,7 @@ module Jirabas
 
     puts "----------\nTo do:\n"
     puts to_do_assigned_to_me.join("\n").to_s
+
   end
 
 end
